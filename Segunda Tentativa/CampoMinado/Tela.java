@@ -46,37 +46,58 @@ public class Tela extends JFrame{
             if(event.getSource() == bntIniciar){
                 bntIniciar.setEnabled(false);
 
-                for(int i = 0; i < vetBnt.length; i++){
-                    vetBnt[i].setEnabled(true);
+                try{
+                    for(int i = 0; i < vetBnt.length; i++){
+                        vetBnt[i].setEnabled(true);
+                    }
+                }
+
+                catch(Exception e){
+                    System.out.println("Ocorreu o seguinte erro " + e.getMessage());
                 }
 
                 // Sortea os números //
                 vet_minas = camp.gerarBombar();
                 contem = false;
                 
-                for(int i = 0; i < vet_minas.length; i++){
-                    System.out.println("Os valores das minas são " + vet_minas[i]);
+                try{
+                    for(int i = 0; i < vet_minas.length; i++){
+                        System.out.println("Os valores das minas são " + vet_minas[i]);
+                    }
                 }
-            }
-
-            int i;
-            for(i = 0; i < vet_minas.length; i++){
-                if(event.getActionCommand().equals(String.valueOf(i))){
-                    contem = camp.verf(i);
-                    break;
-                }
-            }
-
-            if(contem == true){
-                vetBnt[i].setText("C");
-            }
-
-            else{
-                vetBnt[i].setText("E");
-            }
-
-
                 
+                catch(Exception e){
+                    System.out.println("Ocorreu o seguinte erro " + e.getMessage());
+                }
+            }
+
+
+            try{
+                if(event.getSource() != bntIniciar){
+                    int i;
+
+                    for(i = 0; i < vetBnt.length-1; i++){
+                        if(event.getActionCommand().equals(String.valueOf(i))){
+                            contem = camp.verf(i);
+                            break;
+                        }
+                    }
+    
+    
+                    if(contem == true){
+                        vetBnt[i].setText("C");
+                    }
+        
+                    else{
+                        vetBnt[i].setText("E");
+                    } 
+                }
+                
+            }
+            
+            catch(Exception e){
+                System.out.println("Ocorreu o seguinte erro " + e.getMessage());
+            }    
             
         }
     }
