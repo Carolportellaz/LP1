@@ -31,10 +31,17 @@ public class Campo {
     }
 
     public boolean verf(int valor){
-        for(int i = 0; i < vet.length; i++){
-            if(vet[i] == 0){
-                return true;
-            }            
+        try{
+            for(int i = 0; i < vet.length; i++){
+                if(vet[i] == valor){
+                    return true;
+                }            
+            }
+    
+        }
+        
+        catch(Exception e){
+            System.out.println("Ocorreu o seguinte erro no método verificar " + e.getMessage());
         }
 
         return  false;
