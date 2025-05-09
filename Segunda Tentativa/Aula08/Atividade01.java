@@ -1,3 +1,5 @@
+// Salvar os dados
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -60,6 +62,8 @@ public class Atividade01 extends JFrame {
 
     JButton bnt = new JButton("Limpar");
 
+    int valor;
+
     public Atividade01(){
         super("Seguro de Vida");
         
@@ -120,24 +124,99 @@ public class Atividade01 extends JFrame {
         primeira_rodada();
         setVisible(true);
 
-        //bnt.addActionListener(new ActionEvent(){
-            //public void actionPerformed(ActionEvent event){
+        // Classe interna anônima //
+        combo_genero.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event){
 
-            //}
-        //});
+                // DÚVIDAS PARA O LEO //
+                // Nesse caso eu preciso desse if ou ele só vai fazer no combo? //
+                if(event.getStateChange() == ItemEvent.SELECTED){
+                    String genero = combo_genero.getSelectedItem().toString();
 
+                    if(genero.equals("Feminino")){
+                        valor = valor - 200;
+                        txtValor.setText("" + valor);
+                    }
+
+                    else{
+                        valor = valor + 200;
+                        txtValor.setText("" + valor);
+                    }
+                }
+            }
+        });
+
+        radioBebeS.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event){
+                if(event.getStateChange() == ItemEvent.SELECTED){
+                    valor = valor + 250;
+                    txtValor.setText(""+valor);
+                }
+            }
+        });
+
+        radioBebeN.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event){
+                if(event.getStateChange() == ItemEvent.SELECTED){
+                    valor = valor - 250;
+                    txtValor.setText("" + valor);
+                }
+            }
+        });
+
+        boxCan.addItemListener(new Eventos());
+        boxAnem.addItemListener(new Eventos());
+        boxDalt.addItemListener(new Eventos());
+        boxDiab.addItemListener(new Eventos());
+        boxHem.addItemListener(new Eventos());
+        boxHep.addItemListener(new Eventos());
+        boxOst.addItemListener(new Eventos());
+        boxSind.addItemListener(new Eventos());
+
+        bnt.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                if(event.getSource() == bnt){
+                    primeira_rodada();
+                }
+            }
+        });
+
+    }
+
+    // Classe interna //
+    public class Eventos implements ItemListener{
+        public void itemStateChanged(ItemEvent event){
+            if(event.getStateChange() == ItemEvent.SELECTED){
+
+                if(boxAnem.isSelected() == true){
+                    valor = valor + 50;
+                }
+
+                valor = valor + 100;
+                txtValor.setText("" + valor);
+                
+            }
+
+            if(event.getStateChange() == ItemEvent.DESELECTED){
+                if(event.getItem() == boxAnem){
+                    valor = valor - 50;
+                }
+
+                valor = valor - 100;
+                txtValor.setText("" + valor);
+            }
+        }
     }
 
     // Primeira rodada //
     public void primeira_rodada(){
 
         try{
-            int valor = 1000;
+            valor = 1000;
 
-            txtValor.setText(String.valueOf(valor));
             radioBebeN.setSelected(true);
-            radioFumaN.setSelected(true);
-    
+            radioFumaN.setSelected(true);            
+
             boxAnem.setSelected(false);
             boxCan.setSelected(false);
             boxDalt.setSelected(false);
@@ -148,6 +227,8 @@ public class Atividade01 extends JFrame {
             boxSind.setSelected(false);
     
             txtNome.setText("");
+            txtValor.setText(String.valueOf(valor));
+
         }
         
         catch(Exception e){
