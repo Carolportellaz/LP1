@@ -49,7 +49,9 @@ public class App  extends JFrame{
         // Fazendo o look and feel - Lembrar que precisa estar dentro de um try - catch //
         try{
             for(LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
-                if(("Metal").equals(info.getName())){
+                System.out.println(info.getName());
+
+                if(("Nimbus").equals(info.getName())){
                     // Por que aqui eu pego o nome da classe? //
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -60,6 +62,8 @@ public class App  extends JFrame{
         catch(Exception e){
             System.out.println("Ocorreu o seguinte erro " + e.getMessage());
         }
+
+        
 
         itemCad.addActionListener(new ActionListener() {
 
