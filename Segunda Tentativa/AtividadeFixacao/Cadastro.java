@@ -110,25 +110,36 @@ public class Cadastro extends JInternalFrame {
         @Override
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == bntSalvar) {
-                // Tirando a máscara //
-                String id1 = txtID.getText().replaceAll("[. -]", "");
+                try{
+                    // Tirando a máscara //
+                    String id1 = txtID.getText().replaceAll("[. -]", "");
 
-                int id = Integer.parseInt(id1);
+                    int id = Integer.parseInt(id1);
 
-                String titulo = txtTil.getText();
-                int ano = Integer.parseInt(txtAno.getText());
-                String genero = String.valueOf(comboGen.getSelectedItem());
+                    String titulo = txtTil.getText();
+                    int ano = Integer.parseInt(txtAno.getText());
+                    String genero = String.valueOf(comboGen.getSelectedItem());
 
-                // Fazendo o método salvar //
-                Filmes filmes = new Filmes(titulo, ano, genero, id);
 
-                arrayFil.add(filmes);
 
-                per.gravarFilmes(arrayFil, filename);
+                    // Fazendo o método salvar //
+                    Filmes filmes = new Filmes(titulo, ano, genero, id);
 
-                ultimo = arrayFil.size() - 1;
+                    arrayFil.add(filmes);
 
-                carregarFilmes(posicao);
+                    per.gravarFilmes(arrayFil, filename);
+
+                    ultimo = arrayFil.size() - 1;
+
+                    carregarFilmes(posicao);
+                }
+
+                // Tratamento de erros //
+                catch(Exception e){
+                    System.out.println("Ocorreu erro o seguinte erro");
+                }
+
+                
             }
 
             if(event.getSource() == bntAnt){
