@@ -1,4 +1,6 @@
-public class Filmes {
+import java.io.Serializable;
+
+public class Filmes implements Serializable{
     private String titulo;
     private int ano;
     private String genero;
