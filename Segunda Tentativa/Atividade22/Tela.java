@@ -25,6 +25,7 @@ public class Tela extends JFrame{
     private GridBagConstraints constraints = new GridBagConstraints();
 
     private JButton bntSalvar = new JButton("Salvar");
+    private JButton bntGerar = new JButton("Gerar pdf");
 
     ProvaF prova = new ProvaF();
     ArrayList<String> arrayDis = new ArrayList<>();
@@ -59,6 +60,7 @@ public class Tela extends JFrame{
         panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         panel.add(bntSalvar);
+        panel.add(bntGerar);
 
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1;
@@ -80,12 +82,29 @@ public class Tela extends JFrame{
 
                try{
                     prova.inserir(nomeA, nomeD);
+                    txtA.setText("");
+                    comboDis.setSelectedIndex(0);
+                    System.out.println("Usário cadastrado com sucesso!");
                }
 
                catch(Exception e){
                     System.out.println("Ocorreu o seguinte erro ao tentar inserir " + e.getMessage());
                }
             }
+        });
+
+        bntGerar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    prova.criarDoc();
+                }
+
+                catch(Exception er){
+                    System.out.println("Ocorreu o seguinte erro ao tentar criar o arquivo " + er.getMessage());
+                }
+            }
+            
         });
 
     }
